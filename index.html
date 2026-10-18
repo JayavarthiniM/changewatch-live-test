@@ -3,23 +3,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ChangeWatch Live Test</title>
 </head>
 <body>
-  <h1>ChangeWatch Live Test</h1>
-  <h2>Product: Smart Device</h2>
+  <main>
+    <h1>ChangeWatch Live Test</h1>
+    <p>Automatic monitoring demonstration</p>
+    <h2>Product: Smart Device</h2>
 
-  <p id="price">Price: $12</p>
-  <p id="version">Version: 2</p>
-  <p id="updated">Waiting for update</p>
+    <p id="price">Loading price...</p>
+    <p id="version">Loading version...</p>
+    <p id="updated">Loading update time...</p>
+    <p id="status">Time-based updates enabled</p>
+  </main>
 
   <script>
-    let price = 12;
-    let version = 2;
-
+    // Derive values from the current minute.
+    // A new minute produces a new price and version.
     function updateValues() {
-      price++;
-      version++;
+      const minute = Math.floor(Date.now() / 60000);
+
+      const price = 12 + (minute % 1000);
+      const version = 2 + minute;
 
       document.getElementById("price").textContent =
         "Price: $" + price;
@@ -28,10 +34,14 @@
         "Version: " + version;
 
       document.getElementById("updated").textContent =
-        "Last updated: " + new Date().toLocaleTimeString();
+        "Minute ID: " + minute;
     }
 
-    setInterval(updateValues, 60_000);
+    // Update immediately on page load.
+    updateValues();
+
+    // Keep the visible page refreshed at each minute boundary.
+    setInterval(updateValues, 1000);
   </script>
 </body>
 </html>
