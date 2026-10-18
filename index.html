@@ -3,41 +3,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ChangeWatch Live Test</title>
 </head>
 <body>
-  <main>
-    <h1>ChangeWatch Live Test</h1>
-    <p>Automated website change detection test</p>
+  <h1>ChangeWatch Live Test</h1>
+  <h2>Product: Smart Device</h2>
 
-    <h2>Product: Smart Device</h2>
-    <p id="price">Price: $12</p>
-    <p id="version">Version: 2</p>
-    <p id="updated">Last updated: Initial version</p>
-
-    <p id="status">Automatic updates enabled</p>
-  </main>
+  <p id="price">Price: $12</p>
+  <p id="version">Version: 2</p>
+  <p id="updated">Waiting for update</p>
 
   <script>
     let price = 12;
     let version = 2;
 
     function updateValues() {
-      price += 1;
-      version += 1;
+      price++;
+      version++;
 
       document.getElementById("price").textContent =
-        `Price: $${price}`;
+        "Price: $" + price;
 
       document.getElementById("version").textContent =
-        `Version: ${version}`;
+        "Version: " + version;
 
       document.getElementById("updated").textContent =
         "Last updated: " + new Date().toLocaleTimeString();
     }
 
-    setInterval(updateValues, 60 * 1000);
+    setInterval(updateValues, 60_000);
   </script>
 </body>
 </html>
